@@ -1,4 +1,4 @@
-name: Yandex.Music sound metrics CI
+name: Branch Yard CI
 
 on:
   workflow_dispatch:
