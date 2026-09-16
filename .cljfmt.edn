@@ -1,0 +1,7 @@
+{:remove-multiple-non-indenting-spaces? false
+ :remove-surrounding-whitespace?        true
+ :remove-trailing-whitespace?           true
+ :insert-missing-whitespace?            true
+ :align-associative?                    true
+ :indent-comment-forms?                 true
+ :allow-vector-with-newline?            false}
