@@ -1,0 +1,22 @@
+name: "branch-yard"
+services:
+  branch-yard-postgres:
+    container_name: branch-yard-postgres
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - branch-yard-postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - branch-yard
+
+volumes:
+  branch-yard-postgres-data:
+
+networks:
+  branch-yard:
+    driver: bridge
