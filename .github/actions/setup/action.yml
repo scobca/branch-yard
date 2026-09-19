@@ -1,5 +1,5 @@
 name: 'Setup environment'
-description: 'Checkout + Java 8 (Zulu)'
+description: 'Setup Java 8 (Zulu)'
 
 runs:
   using: 'composite'
