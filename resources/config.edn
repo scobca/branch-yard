@@ -1,2 +1,3 @@
-{:app-name  "BranchYard"
- :http-port 8000}
+{:app-name             "BranchYard"
+ :http-port            8000
+ :max-subdomain-length 63}
