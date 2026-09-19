@@ -115,7 +115,7 @@ jobs:
       - name: Setup Clojure with Leiningen
         uses: DeLaGuardo/setup-clojure@13
         with:
-          lein: 'latest'
+          cli: 'latest'
 
       - name: Run tests
         run: clojure -M:test
