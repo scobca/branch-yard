@@ -94,9 +94,36 @@ jobs:
           files: .
           config_file: .markdownlint.yaml
 
+  clojure-testing:
+    needs:
+      - markdown-formatting
+      - clojure-formatting
+
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v6
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '8'
+
+      - name: Setup Clojure with Leiningen
+        uses: DeLaGuardo/setup-clojure@13
+        with:
+          lein: 'latest'
+
+      - name: Run tests
+        run: clojure -M:test
+
   publish-release:
     needs:
       - clojure-formatting
+      - clojure-testing
       - markdown-formatting
 
     runs-on: ubuntu-latest
