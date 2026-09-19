@@ -17,14 +17,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check out repository code
-        uses: actions/checkout@v6
-
-      - name: Setup Java
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'zulu'
-          java-version: '8'
+      - uses: ./.github/actions/setup
 
       - name: Setup Clojure tools
         uses: DeLaGuardo/setup-clojure@13
@@ -47,6 +40,7 @@ jobs:
   clojure-linting:
     needs:
       - clojure-formatting
+
     runs-on: ubuntu-latest
     if: failure()
 
@@ -54,16 +48,7 @@ jobs:
       contents: write
 
     steps:
-      - name: Check out repository code
-        uses: actions/checkout@v6
-        with:
-          ref: ${{ github.head_ref || github.ref_name }}
-
-      - name: Setup Java
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'zulu'
-          java-version: '8'
+      - uses: ./.github/actions/setup
 
       - name: Setup Clojure tools
         uses: DeLaGuardo/setup-clojure@13
@@ -109,14 +94,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check out repository code
-        uses: actions/checkout@v6
-
-      - name: Setup Java
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'zulu'
-          java-version: '8'
+      - uses: ./.github/actions/setup
 
       - name: Setup Clojure with Leiningen
         uses: DeLaGuardo/setup-clojure@13

@@ -1,0 +1,14 @@
+name: 'Setup environment'
+description: 'Checkout + Java 8 (Zulu)'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Check out repository code
+      uses: actions/checkout@v6
+
+    - name: Setup Java
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'zulu'
+        java-version: '8'
