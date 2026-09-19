@@ -17,6 +17,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v6
       - uses: ./.github/actions/setup
 
       - name: Setup Clojure tools
@@ -48,6 +49,7 @@ jobs:
       contents: write
 
     steps:
+      - uses: actions/checkout@v6
       - uses: ./.github/actions/setup
 
       - name: Setup Clojure tools
@@ -94,6 +96,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v6
       - uses: ./.github/actions/setup
 
       - name: Setup Clojure with Leiningen
