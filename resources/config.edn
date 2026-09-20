@@ -1,2 +1,9 @@
-{:app-name  "BranchYard"
- :http-port 8000}
+{:app-name             "BranchYard"
+ :max-subdomain-length 63
+
+ :db                   {:type "postgresql"
+                        :host "localhost"
+                        :port 5432
+                        :name "postgres"}
+
+ :server               {:port 8080}}
