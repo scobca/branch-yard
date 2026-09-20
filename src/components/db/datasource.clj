@@ -1,4 +1,4 @@
-(ns components.datasource
+(ns components.db.datasource
   (:require [clojure.tools.logging :as log]
             [com.stuartsierra.component :as component]
             [next.jdbc.connection :as connection])
