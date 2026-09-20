@@ -2,21 +2,17 @@
   (:require [clojure.edn :as edn])
   (:import (java.io FileNotFoundException)))
 
-(defn load-config
-  "Load common properties from resources."
-  []
+(defn- read-edn [path]
   (try
-    (edn/read-string (slurp "resources/config.edn"))
+    (edn/read-string (slurp path))
     (catch FileNotFoundException _
-      (throw (ex-info "FATAL: resources/config.edn not found! Application cannot start." {})))))
+      (throw (ex-info (str "FATAL: " path " not found!") {})))))
 
-(defn load-sensitive-config
-  "Load sensitive properties from resources."
+(defn fetch-config
+  "Returns merged config map for use in components."
   []
-  (try
-    (edn/read-string (slurp "resources/config.sensitive.edn"))
-    (catch FileNotFoundException _
-      (throw (ex-info "FATAL: resources/config.sensitive.edn not found! Application cannot start." {})))))
-
-(defonce config (load-config))
-(defonce sensitive-config (load-sensitive-config))
+  (let [cfg       (read-edn "resources/config.edn")
+        sensitive (read-edn "resources/config.sensitive.edn")]
+    (-> cfg
+        (assoc-in [:db :username] (get-in sensitive [:db :username]))
+        (assoc-in [:db :password] (get-in sensitive [:db :secret])))))
