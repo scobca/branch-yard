@@ -1,5 +1,5 @@
 name: 'Setup environment'
-description: 'Setup Java 8 (Zulu)'
+description: 'Setup Java 21 (Temurin)'
 
 runs:
   using: 'composite'
@@ -7,5 +7,5 @@ runs:
     - name: Setup Java
       uses: actions/setup-java@v4
       with:
-        distribution: 'zulu'
-        java-version: '8'
+        distribution: 'temurin'
+        java-version: '21'
