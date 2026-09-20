@@ -6,4 +6,8 @@
                         :port 5432
                         :name "postgres"}
 
- :server               {:port 8080}}
+ :server               {:port          8080
+                        :join?         false
+                        :min-threads   4
+                        :max-threads   50
+                        :max-idle-time 30000}}
