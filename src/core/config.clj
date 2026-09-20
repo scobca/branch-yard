@@ -11,7 +11,7 @@
 (defn fetch-config
   "Returns merged config map for use in components."
   []
-  (let [cfg       (read-edn "resources/config.edn")
+  (let [cfg (read-edn "resources/config.edn")
         sensitive (read-edn "resources/config.sensitive.edn")]
     (-> cfg
         (assoc-in [:db :username] (get-in sensitive [:db :username]))
@@ -31,7 +31,8 @@
   (try
     (edn/read-string (slurp "resources/config.sensitive.edn"))
     (catch FileNotFoundException _
-      (throw (ex-info "FATAL: resources/config.sensitive.edn not found! Application cannot start." {})))))
+      (println "WARN: config.sensitive.edn not found, using empty sensitive config.")
+      {})))
 
 (defonce config (load-config))
 (defonce sensitive-config (load-sensitive-config))
