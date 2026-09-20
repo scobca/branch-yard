@@ -14,4 +14,4 @@
      :password (:secret sensitive)}))
 
 (defonce datasource
-         (connection/->pool HikariDataSource db-spec))
+  (connection/->pool HikariDataSource db-spec))
