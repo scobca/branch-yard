@@ -117,6 +117,34 @@ jobs:
       - name: Run tests
         run: clojure -M:test
 
+  send-commits-notification:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+
+    steps:
+      - uses: actions/checkout@v6
+      - name: Prepare commit message
+        id: prepare
+        env:
+          COMMITS_JSON: ${{ toJSON(github.event.commits) }}
+        run: .github/scripts/prepare-commits.sh
+
+      - name: Send TG message
+        uses: appleboy/telegram-action@214f06cfa3d3a588c1472116889437e7c6fd29b1
+        with:
+          to: ${{ secrets.CHAT_ID }}
+          token: ${{ secrets.BOT_TOKEN }}
+          message: |
+            New commits in ${{ github.repository }}
+            
+            ${{ github.actor }} has pushed ${{ steps.prepare.outputs.count }} commit(-s) to ${{ github.ref_name }}
+            
+            ${{ steps.prepare.outputs.commit_list }}
+            
+            🔗 ${{ github.server_url }}/${{ github.repository }}/commits/${{ github.ref_name }}
+            
+            #commit
+
   publish-release:
     needs:
       - clojure-formatting
